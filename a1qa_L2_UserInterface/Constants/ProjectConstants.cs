@@ -1,0 +1,12 @@
+﻿namespace a1qa_L2_UserInterface.Constants
+{
+    public class ProjectConstants
+    {
+        public const int PollingInterval = 3;
+        public const int Timeout = 3;
+        public const string ConstantText = "random text to test";
+        public const string PathToLoginUser = @"Resources\TestData\LoginUser.json";
+        public const string PathToTestData = @"Resources\TestData\TestData.json";
+        public const string PathToUploadImage = @"Resources\TestData\imageToUpload.png";
+    }
+}
