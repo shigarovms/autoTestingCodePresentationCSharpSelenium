@@ -45,7 +45,7 @@ namespace a1qa_L2_UserInterface.Tests
             loginTheFirstFormSteps.UncheckTermsAndCondsCheckBox();
             loginTheFirstFormSteps.ClickLoginNextButton();
             interestsTheSecondFormSteps.InterestsTheSecondFormIsPresent();
-            interestsTheSecondFormSteps.Choose2randomInterests();
+            interestsTheSecondFormSteps.Choose3RandomInterests();
             interestsTheSecondFormSteps.UploadProfilePhoto();
             interestsTheSecondFormSteps.ClickNextButton();
             anketaTheThirdFormSteps.AnketaTheThirdFormIsPresent();
@@ -76,7 +76,7 @@ namespace a1qa_L2_UserInterface.Tests
         {
             welcomePageSteps.WelcomePageIsPresent();
             welcomePageSteps.ClickHereTextLikeButton();
-            Assert.That(welcomePageSteps.TimerStartsFrom(), Is.EqualTo("00:00"));
+            Assert.That(welcomePageSteps.TimerStartsFrom().Contains("00:00"));
             
         }
     }

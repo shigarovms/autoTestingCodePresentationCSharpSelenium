@@ -1,9 +1,6 @@
 ﻿using Aquality.Selenium.Core.Elements;
 using Aquality.Selenium.Core.Elements.Interfaces;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using static a1qa_L2_UserInterface.Elements.CustomElements;
 
 namespace a1qa_L2_UserInterface.Extensions
 {
@@ -19,11 +16,6 @@ namespace a1qa_L2_UserInterface.Extensions
             {
                 throw new TimeoutException($"Elements [{itemName}] were not found by locator [{by}]", e);
             }
-        }
-
-        public static CustomTextBox GetCustomTextBox(this IElementFactory elementFactory, By locator, string name, ElementState state = ElementState.ExistsInAnyState)
-        {
-            return new CustomTextBox(locator, name, state);
         }
     }
 }

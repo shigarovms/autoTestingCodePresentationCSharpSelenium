@@ -1,17 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace a1qa_L2_UserInterface.Utilities
 {
     public static class FileReader
     {
-        public static T ReadJsonData<T>(string path)
-        {
-            return JsonConvert.DeserializeObject<T>(ReadFile(path));
-        }
+        public static T ReadJsonData<T>(string path) => JsonConvert.DeserializeObject<T>(ReadFile(path))!;
 
         private static string ReadFile(string path)
         {

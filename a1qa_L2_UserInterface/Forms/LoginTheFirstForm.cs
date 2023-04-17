@@ -1,5 +1,4 @@
-﻿using a1qa_L2_UserInterface.Enums;
-using a1qa_L2_UserInterface.Extensions;
+﻿using a1qa_L2_UserInterface.Extensions;
 using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
 using OpenQA.Selenium;
@@ -8,11 +7,9 @@ namespace a1qa_L2_UserInterface.Forms
 {
     internal class LoginTheFirstForm : Form
     {
+        private readonly Random random = new();
         private IButton LoginInNextButton => 
             ElementFactory.GetButton(By.LinkText("Next"), "Login in next");
-
-        private By TLDomainNameLocator(TLDomainName tldn) => 
-            By.XPath($"//div[text()=\"{tldn.GetEnumDescription()}\"]");
 
         private ITextBox UserNameTextBox => ElementFactory.GetTextBox(
             By.XPath("//input[@placeholder='Your email']"), "User name");
@@ -27,10 +24,7 @@ namespace a1qa_L2_UserInterface.Forms
             By.XPath("//div[@class='dropdown__header']"), "Top-level domain name selection");
 
         private IList<ILink> TLDomainNameLinks => ElementFactory.GetNotEmptyElementList<ILink>(
-            By.XPath($"//div[contains(@class,'dropdown__list-item')]"), "TLDomain names");
-
-        private ILink TLDomainNameLink(TLDomainName tldm) => 
-            ElementFactory.GetLink(TLDomainNameLocator(tldm), "TLDomain name");
+            By.XPath($"//div[@class='dropdown__list-item']"), "TLDomain names");
 
         private ICheckBox TermsAndCondsCheckBox => 
             ElementFactory.GetCheckBox(By.XPath("//span[@class='icon icon-check checkbox__check']"), 
@@ -51,15 +45,9 @@ namespace a1qa_L2_UserInterface.Forms
 
         public void ClickTLDomainNameSelection() => TLDomainNameSelectionLabel.Click();
 
-        public IList<string> GetLanguageCountries()
+        public void SetTLDomainName()
         {
-            var tempList = TLDomainNameLinks;
-            return TLDomainNameLinks.Select(item => item.Text).ToList();
-        }
-
-        public void SetTLDomainName(TLDomainName tldn)
-        {
-            TLDomainNameLink(tldn).Click();
+            TLDomainNameLinks[random.Next(0, TLDomainNameLinks.Count)].Click();
         }
 
         internal void UncheckTermsAndCondsCheckBox()

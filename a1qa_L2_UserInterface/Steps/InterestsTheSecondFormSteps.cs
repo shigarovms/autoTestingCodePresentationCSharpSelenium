@@ -22,12 +22,11 @@ namespace a1qa_L2_UserInterface.Steps
             interestsTheSecondForm.AssertIsPresent();
         }
 
-        internal void Choose2randomInterests()
+        internal void Choose3RandomInterests()
         {
             LogStep();
             interestsTheSecondForm.ClearCheckboxes();
-            interestsTheSecondForm.ChooseCheckbox1();
-            interestsTheSecondForm.ChooseCheckbox2();
+            interestsTheSecondForm.ChooseRandomCheckboxes(ProjectConstants.NumberOfInterests);
         }
 
         internal void ClickNextButton()

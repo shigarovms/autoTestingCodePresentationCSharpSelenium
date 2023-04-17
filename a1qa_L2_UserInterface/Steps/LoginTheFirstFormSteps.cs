@@ -1,6 +1,5 @@
 ﻿using a1qa_L2_UserInterface.Base;
 using a1qa_L2_UserInterface.Constants;
-using a1qa_L2_UserInterface.Enums;
 using a1qa_L2_UserInterface.Extensions;
 using a1qa_L2_UserInterface.Forms;
 using a1qa_L2_UserInterface.Models;
@@ -11,12 +10,10 @@ namespace a1qa_L2_UserInterface.Steps
     internal class LoginTheFirstFormSteps : BaseSteps
     {
         private readonly LoginTheFirstForm loginTheFirstForm;
-        private readonly LoginUser loginUser;
 
         public LoginTheFirstFormSteps()
         {
             loginTheFirstForm = new LoginTheFirstForm();
-            loginUser = FileReader.ReadJsonData<LoginUser>(ProjectConstants.PathToLoginUser);
         }
 
         public void LoginTheFirstFormIsPresent()
@@ -45,9 +42,10 @@ namespace a1qa_L2_UserInterface.Steps
 
         public void InputCredentionals()
         {
-            SetUserName(loginUser.UserName);
-            SetDomain(loginUser.UserDomain);
-            SetPassword(loginUser.Password);
+            string password = PasswordGenerator.GeneratePassword();
+            SetUserName(password);
+            SetDomain(password);
+            SetPassword(password);
         }
 
         public void ClickTLDomainSelection()
@@ -58,8 +56,8 @@ namespace a1qa_L2_UserInterface.Steps
 
         public void SetTLDomainName()
         {
-            LogStep(nameof(SetTLDomainName) + $"Set top-level domain name - [{TLDomainName.couk}]");
-            loginTheFirstForm.SetTLDomainName(TLDomainName.couk);
+            LogStep(nameof(SetTLDomainName) + $"Set random top-level domain name");
+            loginTheFirstForm.SetTLDomainName();
         }
 
         internal void UncheckTermsAndCondsCheckBox()
