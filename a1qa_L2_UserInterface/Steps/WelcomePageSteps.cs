@@ -13,13 +13,13 @@ namespace Test.Web.Steps
             welcomePage = new WelcomePage();
         }
 
-        public void WelcomePageIsPresent()
+        internal void WelcomePageIsPresent()
         {
             LogAssertion();
             welcomePage.AssertIsPresent();
         }
 
-        public void ClickHereTextLikeButton()
+        internal void ClickHereTextLikeButton()
         {
             LogStep();
             welcomePage.ClickHereTextLikeButton();

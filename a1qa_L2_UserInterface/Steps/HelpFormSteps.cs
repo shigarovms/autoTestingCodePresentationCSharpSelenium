@@ -1,11 +1,6 @@
 ﻿using a1qa_L2_UserInterface.Base;
 using a1qa_L2_UserInterface.Extensions;
 using a1qa_L2_UserInterface.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace a1qa_L2_UserInterface.Steps
 {
@@ -18,19 +13,19 @@ namespace a1qa_L2_UserInterface.Steps
             helpForm = new HelpForm();
         }
 
-        public void HelpFormIsPresent()
+        internal void HelpFormIsPresent()
         {
             LogAssertion();
             helpForm.AssertIsPresent();
         }
 
-        public void HelpFormIsHidden()
+        internal void HelpFormIsNotPresent()
         {
             LogAssertion();
-            helpForm.AssertIsHidden();
+            helpForm.AssertIsNotPresent();
         }
 
-        public void HideHelpForm()
+        internal void HideHelpForm()
         {
             LogStep();
             helpForm.ClickSendToBottomButton();

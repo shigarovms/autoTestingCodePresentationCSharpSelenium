@@ -7,17 +7,14 @@ namespace a1qa_L2_UserInterface.Forms
     internal class HelpForm : Form
     {
         private IButton SendToBottomButton => ElementFactory.GetButton(
-                        By.XPath("//button[@class='button button--solid button--blue help-form__send-to-bottom-button']"),
+                        By.XPath("//button[contains(@class, 'send-to-bottom-button')]"),
                                  "'Send to bottom' button");
 
         public HelpForm() : base(By.XPath("//div[@class='help-form']"), "Help form")
         {
         }
 
-        public void ClickSendToBottomButton()
-        {
-            SendToBottomButton.Click();
-        }
+        internal void ClickSendToBottomButton() => SendToBottomButton.Click();
 
     }
 }
