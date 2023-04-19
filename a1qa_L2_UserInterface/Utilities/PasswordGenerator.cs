@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace a1qa_L2_UserInterface.Utilities
 {
-    internal class PasswordGenerator
+    internal static class PasswordGenerator
     {
+        private const string capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string numerals = "0123456789";
+        private const string cyrillicLetters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        private const int ASCIIRangeStart = 33;
+        private const int ASCIIRangeEnd = 126;
+        private static int passwordLength = Tests.Test.testData.GetValue<int>("TC0001_AllThreeCardsAreReachable.passwordLength");
         public static string GeneratePassword()
         {
-            const int passwordLength = 10;
-            const string capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const string numerals = "0123456789";
-            const string cyrillicLetters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-
             StringBuilder passwordBuilder = new StringBuilder(passwordLength);
 
             // Add a random capital letter
@@ -30,7 +27,7 @@ namespace a1qa_L2_UserInterface.Utilities
             // Add random characters until the password length is met
             while (passwordBuilder.Length < passwordLength)
             {
-                char randomChar = (char)new Random().Next(33, 126); // ASCII range of printable characters
+                char randomChar = (char)new Random().Next(ASCIIRangeStart, ASCIIRangeEnd); // ASCII range of printable characters
                 passwordBuilder.Append(randomChar);
             }
 

@@ -1,11 +1,6 @@
 ﻿using a1qa_L2_UserInterface.Base;
 using a1qa_L2_UserInterface.Extensions;
 using a1qa_L2_UserInterface.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace a1qa_L2_UserInterface.Steps
 {
@@ -18,19 +13,19 @@ namespace a1qa_L2_UserInterface.Steps
             cookiesForm = new CookiesForm();
         }
 
-        public void CookiesFormIsPresent()
+        internal void CookiesFormIsPresent()
         {
             LogAssertion();
             cookiesForm.AssertIsPresent();
         }
 
-        public void CookiesFormIsHidden()
+        internal void CookiesFormIsHidden()
         {
             LogAssertion();
-            cookiesForm.AssertIsHidden();
+            cookiesForm.AssertIsNotPresent();
         }
 
-        public void AcceptCookies()
+        internal void AcceptCookies()
         {
             LogStep();
             cookiesForm.ClickAcceptCookiesButton();

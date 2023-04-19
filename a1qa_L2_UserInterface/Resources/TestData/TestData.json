@@ -1,3 +1,8 @@
 {
-  "Url": "https://userinyerface.com/"
+  "TC0001_AllThreeCardsAreReachable": {
+    "pthToUploadedImage": "Resources\\TestData\\imageToUpload.png",
+    "numberOfInterests": 3,
+    "expectedTimer": "00:00",
+    "passwordLength": 10
+  }
 }

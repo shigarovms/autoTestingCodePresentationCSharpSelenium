@@ -1,11 +1,9 @@
-﻿using Aquality.Selenium.Browsers;
-using NUnit.Framework;
-using a1qa_L2_UserInterface.Base;
-using a1qa_L2_UserInterface.Constants;
-using a1qa_L2_UserInterface.Models;
-using a1qa_L2_UserInterface.Utilities;
-using Test.Web.Steps;
+﻿using a1qa_L2_UserInterface.Base;
 using a1qa_L2_UserInterface.Steps;
+using Aquality.Selenium.Browsers;
+using Aquality.Selenium.Core.Utilities;
+using NUnit.Framework;
+using Test.Web.Steps;
 
 namespace a1qa_L2_UserInterface.Tests
 {
@@ -18,12 +16,18 @@ namespace a1qa_L2_UserInterface.Tests
         private readonly HelpFormSteps helpFormSteps = new();
         private readonly CookiesFormSteps cookiesFormSteps = new();
 
-        private readonly TestData testData = FileReader.ReadJsonData<TestData>(ProjectConstants.PathToTestData);
+        internal static readonly JsonSettingsFile config = new(@"TestData\config.json");
+        internal static readonly JsonSettingsFile testData = new(@"TestData\testData.json");
+
+        private static string UploadFile => Path.GetFullPath(
+                                        testData.GetValue<string>("TC0001_AllThreeCardsAreReachable.pthToUploadedImage"));
+        private static int NumberOfInterests => testData.GetValue<int>("TC0001_AllThreeCardsAreReachable.numberOfInterests");
+        private static string ExpectedTimer => testData.GetValue<string>("TC0001_AllThreeCardsAreReachable.expectedTimer");
 
         [SetUp]
         public void Setup()
         {
-            GoToPage(testData.Url);
+            GoToPage(config.GetValue<string>("Url"));
             SetScreenExpansionMaximize();
         }
 
@@ -45,8 +49,8 @@ namespace a1qa_L2_UserInterface.Tests
             loginTheFirstFormSteps.UncheckTermsAndCondsCheckBox();
             loginTheFirstFormSteps.ClickLoginNextButton();
             interestsTheSecondFormSteps.InterestsTheSecondFormIsPresent();
-            interestsTheSecondFormSteps.Choose3RandomInterests();
-            interestsTheSecondFormSteps.UploadProfilePhoto();
+            interestsTheSecondFormSteps.ChooseRandomInterests(NumberOfInterests);
+            interestsTheSecondFormSteps.UploadProfilePhoto(UploadFile);
             interestsTheSecondFormSteps.ClickNextButton();
             anketaTheThirdFormSteps.AnketaTheThirdFormIsPresent();
         }
@@ -58,7 +62,7 @@ namespace a1qa_L2_UserInterface.Tests
             welcomePageSteps.ClickHereTextLikeButton();
             helpFormSteps.HelpFormIsPresent();
             helpFormSteps.HideHelpForm();
-            helpFormSteps.HelpFormIsHidden();
+            helpFormSteps.HelpFormIsNotPresent();
         }
 
         [Test(Description = "TC-0003 Cookies form disappears after accepting them")]
@@ -76,8 +80,8 @@ namespace a1qa_L2_UserInterface.Tests
         {
             welcomePageSteps.WelcomePageIsPresent();
             welcomePageSteps.ClickHereTextLikeButton();
-            Assert.That(welcomePageSteps.TimerStartsFrom().Contains("00:00"));
-            
+            Assert.That(welcomePageSteps.TimerStartsFrom(), Does.Contain(ExpectedTimer));
+
         }
     }
 }

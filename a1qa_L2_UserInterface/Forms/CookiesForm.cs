@@ -14,9 +14,6 @@ namespace a1qa_L2_UserInterface.Forms
         {
         }
 
-        public void ClickAcceptCookiesButton()
-        {
-            AcceptCookiesButton.Click();
-        }
+        internal void ClickAcceptCookiesButton() => AcceptCookiesButton.Click();
     }
 }

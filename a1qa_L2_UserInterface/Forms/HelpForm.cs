@@ -14,10 +14,7 @@ namespace a1qa_L2_UserInterface.Forms
         {
         }
 
-        public void ClickSendToBottomButton()
-        {
-            SendToBottomButton.Click();
-        }
+        internal void ClickSendToBottomButton() => SendToBottomButton.Click();
 
     }
 }

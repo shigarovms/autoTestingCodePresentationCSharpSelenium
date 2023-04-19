@@ -1,6 +1,5 @@
 ﻿using Aquality.Selenium.Core.Logging;
 using Humanizer;
-using System;
 using System.Runtime.CompilerServices;
 
 namespace a1qa_L2_UserInterface.Base

@@ -8,10 +8,8 @@ namespace a1qa_L2_UserInterface.Utilities
 
         private static string ReadFile(string path)
         {
-            using (StreamReader sr = new StreamReader(path))
-            {
-                return sr.ReadToEnd();
-            }
+            using StreamReader sr = new(path);
+            return sr.ReadToEnd();
         }
     }
 }

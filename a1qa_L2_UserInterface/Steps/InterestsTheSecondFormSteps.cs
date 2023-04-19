@@ -1,19 +1,17 @@
 ﻿using a1qa_L2_UserInterface.Base;
-using a1qa_L2_UserInterface.Constants;
 using a1qa_L2_UserInterface.Extensions;
 using a1qa_L2_UserInterface.Forms;
+using a1qa_L2_UserInterface.Utilities;
 
 namespace a1qa_L2_UserInterface.Steps
 {
     internal class InterestsTheSecondFormSteps : BaseSteps
     {
         private readonly InterestsTheSecondForm interestsTheSecondForm;
-        private readonly string uploadFile;
 
         public InterestsTheSecondFormSteps()
         {
             interestsTheSecondForm = new InterestsTheSecondForm();
-            uploadFile = Path.GetFullPath(ProjectConstants.PathToUploadImage);
         }
 
         public void InterestsTheSecondFormIsPresent()
@@ -21,12 +19,27 @@ namespace a1qa_L2_UserInterface.Steps
             LogAssertion();
             interestsTheSecondForm.AssertIsPresent();
         }
-
-        internal void Choose3RandomInterests()
+        // random to helper class
+        internal void CheckRandomCheckBoxes(int count)
         {
             LogStep();
-            interestsTheSecondForm.ClearCheckboxes();
-            interestsTheSecondForm.ChooseRandomCheckboxes(ProjectConstants.NumberOfInterests);
+            int checkboxesCount = interestsTheSecondForm.GetCheckboxesCount();
+            while (count > 0)
+            {
+                int checkBoxId = RandomHelper.GetRandomNumberFromRange(checkboxesCount);
+                if (!interestsTheSecondForm.IsCheckBoxChecked(checkBoxId))
+                {
+                    interestsTheSecondForm.CheckNthCheckbox(checkBoxId);
+                    count--;
+                }
+            }
+        }
+
+        internal void ChooseRandomInterests(int count)
+        {
+            LogStep();
+            interestsTheSecondForm.UncheckAllCheckboxes();
+            CheckRandomCheckBoxes(count);
         }
 
         internal void ClickNextButton()
@@ -35,11 +48,11 @@ namespace a1qa_L2_UserInterface.Steps
             interestsTheSecondForm.ClickNextButton();
         }
 
-        internal void UploadProfilePhoto()
+        internal void UploadProfilePhoto(string uploadFile)
         {
             LogStep();
             interestsTheSecondForm.ClickUploadButton();
-            interestsTheSecondForm.UploadProfilePhoto(uploadFile);
+            InputSimulatorHelper.UploadImage(uploadFile);
         }
     }
 }

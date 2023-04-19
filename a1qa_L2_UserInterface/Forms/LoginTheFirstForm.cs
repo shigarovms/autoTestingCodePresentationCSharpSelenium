@@ -8,7 +8,7 @@ namespace a1qa_L2_UserInterface.Forms
     internal class LoginTheFirstForm : Form
     {
         private readonly Random random = new();
-        private IButton LoginInNextButton => 
+        private IButton LoginInNextButton =>
             ElementFactory.GetButton(By.LinkText("Next"), "Login in next");
 
         private ITextBox UserNameTextBox => ElementFactory.GetTextBox(
@@ -26,8 +26,8 @@ namespace a1qa_L2_UserInterface.Forms
         private IList<ILink> TLDomainNameLinks => ElementFactory.GetNotEmptyElementList<ILink>(
             By.XPath($"//div[@class='dropdown__list-item']"), "TLDomain names");
 
-        private ICheckBox TermsAndCondsCheckBox => 
-            ElementFactory.GetCheckBox(By.XPath("//span[@class='icon icon-check checkbox__check']"), 
+        private ICheckBox TermsAndCondsCheckBox =>
+            ElementFactory.GetCheckBox(By.XPath("//span[@class='icon icon-check checkbox__check']"),
                                                 "Terms & conditions checkbox");
 
         public LoginTheFirstForm() : base(By.XPath("//div[@class='login-form']"),
@@ -35,17 +35,17 @@ namespace a1qa_L2_UserInterface.Forms
         {
         }
 
-        public void ClickLoginNextButton() => LoginInNextButton.Click();
+        internal void ClickLoginNextButton() => LoginInNextButton.Click();
 
-        public void SetUserName(string userName) => UserNameTextBox.ClearAndType(userName);
+        internal void SetUserName(string userName) => UserNameTextBox.ClearAndType(userName);
 
-        public void SetDomain(string userDomain) => DomainTextBox.ClearAndType(userDomain);
+        internal void SetDomain(string userDomain) => DomainTextBox.ClearAndType(userDomain);
 
-        public void SetPassword(string userPassword) => PasswordTextBox.ClearAndType(userPassword);
+        internal void SetPassword(string userPassword) => PasswordTextBox.ClearAndType(userPassword);
 
-        public void ClickTLDomainNameSelection() => TLDomainNameSelectionLabel.Click();
+        internal void ClickTLDomainNameSelection() => TLDomainNameSelectionLabel.Click();
 
-        public void SetTLDomainName()
+        internal void SetTLDomainName()
         {
             TLDomainNameLinks[random.Next(0, TLDomainNameLinks.Count)].Click();
         }
