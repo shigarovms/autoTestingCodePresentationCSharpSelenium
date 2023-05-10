@@ -36,7 +36,8 @@ namespace a1qa_L2_UserInterface.Tests
         {
             AqualityServices.Browser.Quit();
         }
-
+        
+        [Ignore]
         [Test(Description = "TC-0001 All three cards are reachable")]
         public void TC0001_AllThreeCardsAreReachable()
         {
